@@ -21,7 +21,7 @@ class Search_articles:
     Класс для извлечения наименования статьи, даты ее размещения и ссылки на статью.
     Парсит данные только по наличию в превью слов из класса Keyword.
     Передаваемые параметры:
-    Первый аргумент - основная ссылка на ХАБР https://habr.com/ru/all/
+    Первый аргумент - основная ссылка на ХАБР https://habr.com/ru/all
     Второй аргумент - количество страниц для обхода (по дефолту 1-я страница с 20 статьями)
     '''
 
@@ -94,7 +94,7 @@ class Search_articles:
                 if i in res[0]:
                     dict_articles['Время размещения:'] = articles_time.attrs['title']
                     dict_articles['Заголовок статьи:'] = articles_head.text
-                    dict_articles['Ссылка на статью:'] = self.link_ + articles_href.attrs['href']
+                    dict_articles['Ссылка на статью:'] = 'https://habr.com' + articles_href.attrs['href']
                     dict_articles['Совпавшее слово:'] = i
             a.append(dict_articles) if dict_articles else None
         return a
