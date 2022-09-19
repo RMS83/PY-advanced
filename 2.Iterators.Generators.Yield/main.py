@@ -1,10 +1,20 @@
-def FlatIterator(nested_list):
-    res = (value for list_ in nested_list for value in list_)
-    while True:
-        try:
-            yield next(res)
-        except StopIteration:
-            break
+class FlatIterator:
+    def __init__(self, list_):
+        self.list_ = list_
+
+    def __iter__(self):
+        self.cursor = 0
+        self.step = -1
+        return self
+
+    def __next__(self):
+        self.step += 1
+        if self.step > len(self.list_[self.cursor]) - 1:
+            self.cursor += 1
+            if self.cursor >= len(self.list_):
+                raise StopIteration
+            self.step = 0
+        return self.list_[self.cursor][self.step]
 
 
 nested_list = [
@@ -15,6 +25,7 @@ nested_list = [
 
 if __name__ == "__main__":
     print('Задание 1')
+
     for item in FlatIterator(nested_list):
         print(item)
 
